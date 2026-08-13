@@ -1,0 +1,119 @@
+@import "tailwindcss";
+@import "@fontsource-variable/inter";
+
+@theme {
+  --font-sans: "Inter Variable", "Inter", ui-sans-serif, system-ui,
+    -apple-system, "Segoe UI", "Roboto", sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", "Menlo", "Monaco",
+    "Consolas", monospace;
+
+  --color-bg: #fafaf9;
+  --color-ink: #171717;
+  --color-muted: #737373;
+  --color-line: #e7e5e4;
+  --color-subtle: #d4d4d4;
+  --color-surface: #f5f5f4;
+
+  --color-accent: #3b82f6;
+  --color-accent-soft: #dbeafe;
+
+  --animate-fade-up: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-fade-in: fade-in 0.6s ease both;
+
+  @keyframes fade-up {
+    0% {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--color-bg);
+    color: var(--color-ink);
+  }
+
+  ::selection {
+    background-color: var(--color-ink);
+    color: var(--color-bg);
+  }
+}
+
+@layer components {
+  .frame {
+    border-left: 1px solid var(--color-line);
+    border-right: 1px solid var(--color-line);
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .frame-stack > * + * {
+    border-top: 1px solid var(--color-line);
+  }
+
+  .frame-pad {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .frame-block {
+    padding: 2.5rem 1.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .frame-pad {
+      padding-left: 2rem;
+      padding-right: 2rem;
+    }
+
+    .frame-block {
+      padding: 3.5rem 2rem;
+    }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    animation: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
